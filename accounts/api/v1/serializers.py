@@ -39,6 +39,7 @@ class ChangePasswordView(serializers.Serializer):
     new_password1 = serializers.CharField(required=True)
 
     def validate(self, attrs):
+
         if attrs.get('new_password') != attrs.get('new_password1'):
             raise serializers.ValidationError('Passwords do not match')
         try:
@@ -53,3 +54,16 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id', 'email', 'username', 'first_name', 'last_name', 'description']
+
+
+class ActivationSerializerApiView(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        try:
+            user_obj = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise serializers.ValidationError('User does not exist')
+        if user_obj.is_verfied:
+            raise serializers.ValidationError('User already activated and verifies')

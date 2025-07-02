@@ -24,4 +24,10 @@ urlpatterns = [
     path('jwt/refresh/', TokenRefreshView.as_view(), name='jwt_refresh'),
     path('jwt/verify/', TokenVerifyView.as_view(), name='jwt_verify'),
 
+    path('test-email/',views.TestSendEmail.as_view(), name='test_email'),
+    #activation
+    path('activation/send/<str:token>',views.ActivationApiView.as_view(), name='send_activation'),
+    #resend activation
+    path('resend/activation/<str:token>',views.ResendActivationView.as_view(), name='resend_activation'),
+
 ]

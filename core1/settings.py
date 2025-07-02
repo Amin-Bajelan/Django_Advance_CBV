@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'rest_framework_simplejwt',
-
+    'mail_templated'
 ]
 
 MIDDLEWARE = [
@@ -150,3 +150,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+#email setting
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
