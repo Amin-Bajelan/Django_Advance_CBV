@@ -81,3 +81,6 @@ class DeletePost(LoginRequiredMixin, DeleteView):
 @api_view()
 def api_post_list(request):
     return Response({"name":"Amin"})
+
+class PostListApi(TemplateView):
+    template_name = 'blog/list_post_api.html'
